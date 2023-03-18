@@ -1,0 +1,26 @@
+@import './styles/utils.scss';
+
+.SassComponent {
+    display: flex;
+    .box{
+        background: $normal;
+        cursor: pointer;
+        transition: all 0.3s ease-in;
+        &.blue{ //&는 상위 부모 선택자로 치환
+            background: $blue;
+            @include square(1);  //.blue클래스가 .box와 함꼐 사용되었을때
+        }
+        &.green{
+            background: $green;
+            @include square(2);  //.blue클래스가 .box와 함꼐 사용되었을때
+        }
+        &.normal{
+            background: $normal;
+            @include square(3)  //.blue클래스가 .box와 함꼐 사용되었을때
+        }
+        &:hover{
+            //.box에 마우스를 올렸을 때
+            background:black;
+        }
+    }
+}

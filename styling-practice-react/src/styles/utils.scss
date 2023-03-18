@@ -1,0 +1,10 @@
+$blue: #339AF0;
+$green: #147426;
+$normal: #11390f;
+//믹스인 만들기: 재사용 되는 스타일 블록으로 함수처럼 사용가능
+
+@mixin square($size){
+    $caclulated: 32px*$size;
+    width: $caclulated;
+    height: $caclulated;
+}
