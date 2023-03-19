@@ -10,3 +10,8 @@ const CSSModule = () => {
     </div>
   );
 };
+
+const sizes = {
+  desktop: 1034,
+  tablet: 343,
+};
