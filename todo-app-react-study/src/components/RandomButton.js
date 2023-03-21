@@ -1,10 +1,7 @@
 import { useState } from 'react';
-import './components/RandomButton.scss';
+import './RandomButton.scss';
 const RandomButton = ({ todos, onRandom }) => {
-  const [id, text, checked] = todos;
   const [randomNumber, setRandomNumber] = useState(0);
-  const [totalNumber, setTotalNumber] = useState(0);
-  const [checkedTodo, setCheckedTodo] = useState([]);
   const onClick = () => {
     setRandomNumber(Math.floor(Math.random() * todos.length));
   };
@@ -12,9 +9,9 @@ const RandomButton = ({ todos, onRandom }) => {
   return (
     <div>
       <button className="randomButton" onClick={onClick}>
-        랜덤 먹을거
+        Random Menu
       </button>
-      <div>{todos[randomNumber].text}</div>
+      <div className="randomText">{`오늘 식사는 ${todos[randomNumber].text}입니다.`}</div>
     </div>
   );
 };

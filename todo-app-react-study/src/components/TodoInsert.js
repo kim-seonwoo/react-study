@@ -3,12 +3,14 @@ import { MdAdd } from 'react-icons/md';
 import { useCallback, useState } from 'react';
 //react-icons를 이용하여 아이콘 끌어오기
 
+//onInsert props에 대한 데이터를 가져온다.
 const TodoInsert = ({ onInsert }) => {
   const [value, setValue] = useState('');
 
   const onChange = useCallback((e) => {
     setValue(e.target.value);
   }, []);
+  //입략 값을 value로 전환하는 함수
 
   const onSubmit = useCallback(
     (e) => {
@@ -17,7 +19,7 @@ const TodoInsert = ({ onInsert }) => {
       e.preventDefault(); //submit 새로고침을 방지
     },
     [onInsert, value],
-  );
+  ); //onClick 대신 폼 전체에 onSubmit을 하면 엔터키 사용을 통해 제출 가능.
   return (
     <form className="TodoInsert" onSubmit={onSubmit}>
       <input
