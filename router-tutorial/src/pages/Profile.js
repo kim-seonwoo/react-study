@@ -11,6 +11,8 @@ const data = {
   },
 };
 
+//data에 kim과 jobs에 대한 정보를 담음
+
 const Profile = () => {
   const params = useParams();
   const profile = data[params.username];
@@ -20,8 +22,8 @@ const Profile = () => {
       <h1>사용자 프로필</h1>
       {profile ? (
         <div>
-          <h2>{profile.name}</h2>
-          <h2>{profile.jobs}</h2>
+          <h1>{profile.name}</h1>
+          <h2>{profile.job}</h2>
         </div>
       ) : (
         <p>존재하지 않는 프로필</p>
