@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import NewsItem from './newsItem';
 import axios from '../node_modules/axios/index';
 import { useState, useEffect } from 'react';
-
+import usePromise from './lib/usePromise';
 const NewsListBlock = styled.div`
     box-sizing: border-box;
     padding-bottom: 3rem;
@@ -17,35 +17,26 @@ const NewsListBlock = styled.div`
 `;
 
 const NewsList = ({ category }) => {
-  const [articles, setArticles] = useState(null);
-  const [loading, setLoading] = useState(null);
-  useEffect(() => {
-    const fetchDate = async () => {
-      setLoading(true);
-      try {
-        const query = category === 'all' ? '' : `&category=${category};`;
-        const response = await axios.get(
-          `https://newsapi.org/v2/top-headlines?country=kr${query}&apikey=656c40f76d88411da483c3fd1ac7954d`,
-        );
-        setArticles(response.data.articles);
-      } catch (e) {
-        console.log(e);
-      }
-      setLoading(false);
-    };
-    fetchDate();
+  const [loading, response, error] = usePromise(() => {
+    const query = category === 'all' ? '' : `&category=${category}`;
+    return axios.get(
+      `https://newsapi.org/v2/top-headlines?country=kr${query}&apikey=656c40f76d88411da483c3fd1ac7954d`,
+    );
   }, [category]);
 
   if (loading) {
     return <NewsListBlock>...대기중</NewsListBlock>;
   }
-
-  if (!articles) {
+  if (!response) {
     return null;
   }
+
+  if (error) {
+    return <NewsListBlock>에러!</NewsListBlock>;
+  }
+  const { articles } = response.data;
   return (
     <NewsListBlock>
-      {console.log(articles)}
       {articles.map((article) => (
         <NewsItem key={article.url} article={article} />
       ))}
